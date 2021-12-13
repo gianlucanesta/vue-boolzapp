@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boolzapp - Milestone 2</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Wrapper -->
+    <div id="root">
+        <!-- Left Column -->
+        <div class="sidebar">
+            
+            <!-- Owner User Bar -->
+            <div class="owner h-70">
+
+                <!-- Owner Info -->
+                <div class="owner-info">
+
+                    <!-- Owner Image -->
+                    <div class="avatar-image-container">
+                        <img src="img/avatar_io.jpg" alt="">
+                    </div>
+
+                    <div>{{ ownerName }}</div>
+                </div>
+
+                <!-- Owner Options -->
+                <div class="options">
+                    <i class="fas fa-circle-notch"></i>
+                    <i class="fas fa-comment-alt"></i>
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>
+            </div>
+
+            <!-- Notification Bar -->
+            <div class="notifications h-80">
+
+                <!-- Bell Icon Container -->
+                <div class="bell">
+                    <i class="fas fa-bell-slash"></i>
+                </div>
+
+                <div class="activate-notifications">
+                    <span class="receive-notifications">Ricevi notifiche di nuovi messaggi</span>
+                    <a href="#">Attiva notifiche desktop</a>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-bar-container h-50">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        placeholder="Cerca o inizia una nuova chat"
+                    >
+                </div>
+            </div>
+
+            <!-- Contact List -->
+            <ul class="contact-list">
+
+                <li 
+                    class="single-contact" 
+                    v-for="(contact, index) in contacts" 
+                    :class="{ selected : contact === currentUser }" 
+                    @click="changeContact(index)"   
+
+                >
+                    <!-- Contact Image Container -->
+                    <div class="avatar-image-container">
+                        
+                        <!-- Contact Image -->
+                        <img :src="'img/avatar' + contact.avatar + '.jpg'" alt="">
+                    </div>
+                    
+                    <!-- Contact Name -->
+                    <span>{{ contact.name }}</span>
+                </li>
+            </ul>
+
+        </div>
+        <!-- End Left Column -->
+
+        <!-- Right Column - Message Container -->
+        <main>
+            <!-- User Top Bar -->
+            <div class="user h-70">
+
+               <div class="user-info">
+                    <!--User Image-->
+                    <div class="avatar-image-container">
+                        <img :src="'img/avatar' + currentUser.avatar + '.jpg'" alt="">
+                    </div>
+                    <!-- User Name -->
+                    <div class="user-data">
+                        <span>{{ currentUser.name }}</span>
+                        <span class="last-access">Ultimo accesso oggi alle</span> 
+                    </div>
+                </div>
+
+                <!-- User Options -->
+                <div class="options">
+                    <i class="fas fa-search"></i>
+                    <i class="fas fa-paperclip"></i>
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>      
+            </div>
+
+            <!-- Messages Section -->
+            <div class="messages">
+                <div 
+                    class="message" 
+                    v-for="message in currentUser.messages" 
+                    :class="{ sent : message.status === 'sent', 
+                              received : message.status === 'received' 
+                            }"
+                >
+                    <!-- Message Text -->
+                    <span class="message-text">{{ message.text }}</span>
+
+                    <!-- Message Date -->
+                    <span class="message-date">{{ message.date }}</span>
+                </div>
+            </div>
+
+            <!-- Input Text Bottom Bar -->
+            <div class="message-bar h-70">
+                <i class="far fa-smile"></i>
+                <input 
+                    type="text" 
+                    class="message-input" 
+                    placeholder="Scrivi un messaggio"
+                >
+                <i class="fas fa-microphone"></i>
+            </div>
+
+        </main>
+        <!-- End Right Column - Message Container -->
+    </div>
+    <!-- End Wrapper -->
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>
