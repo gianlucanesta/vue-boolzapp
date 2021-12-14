@@ -122,7 +122,8 @@ const app = new Vue({
         sendMessage() {
             const messages = this.currentUser.messages;
 
-            if (this.messageInputBar) {
+            if (this.messageInputBar.trim().length > 0) {
+                
                 messages.push(
                     { 
                         date: this.actualTime(),
@@ -130,13 +131,14 @@ const app = new Vue({
                         status: "sent"
                     }
                 );
+
+                // Una volta inviato il messaggio pulisce la barra di input
+                this.messageInputBar = "";
+            
+                // Riceve automaticamente la risposta dopo un lasso di tempo prefefinito
+                this.receiveMessage();        
             }    
-            // Una volta inviato il messaggio pulisce la barra di input
-            this.messageInputBar = "";
-            
-            // Riceve automaticamente la risposta dopo un lasso di tempo prefefinito
-            this.receiveMessage();          
-            
+                   
         },
 
         // Ricevi messaggio automatico dopo 1 secondo

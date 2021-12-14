@@ -101,12 +101,16 @@
                <div class="user-info">
                     <!--User Image-->
                     <div class="avatar-image-container">
-                        <img :src="'img/avatar' + currentUser.avatar + '.jpg'" alt="">
+                        <img 
+                            :src="'img/avatar' + currentUser.avatar + '.jpg'" 
+                            :alt=" currentUser.name "
+                        >
                     </div>
                     <!-- User Name -->
                     <div class="user-data">
                         <span>{{ currentUser.name }}</span>
-                        <span class="last-access">Ultimo accesso oggi alle</span> 
+                        <span 
+                        class="last-access">Ultimo accesso oggi alle</span> 
                     </div>
                 </div>
 
@@ -122,16 +126,24 @@
             <div class="messages">
                 <div 
                     class="message" 
-                    v-for="message in currentUser.messages" 
+                    v-for="(message, index) in currentUser.messages" 
                     :class="{ sent : message.status === 'sent', 
                               received : message.status === 'received' 
                             }"
                 >
                     <!-- Message Text -->
-                    <span class="message-text">{{ message.text }}</span>
+                    <span 
+                        class="message-text"
+                    >
+                    {{ message.text }}
+                    </span>
 
                     <!-- Message Date -->
-                    <span class="message-date">{{ message.date }}</span>
+                    <span 
+                        class="message-date"
+                    >
+                    {{ message.date }}
+                    </span>
                 </div>
             </div>
 
@@ -158,11 +170,12 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     
     <!-- JS Script  -->
-    <script src="./js/main.js"></script>
+    <script src="js/main.js"></script>
 
     <!--DayJS CDN  -->
     <script 
-        src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.js" integrity="sha512-bwD3VD/j6ypSSnyjuaURidZksoVx3L1RPvTkleC48SbHCZsemT3VKMD39KknPnH728LLXVMTisESIBOAb5/W0Q==" 
+        src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.js" 
+        integrity="sha512-bwD3VD/j6ypSSnyjuaURidZksoVx3L1RPvTkleC48SbHCZsemT3VKMD39KknPnH728LLXVMTisESIBOAb5/W0Q==" 
         crossorigin="anonymous" 
         referrerpolicy="no-referrer"
     >
