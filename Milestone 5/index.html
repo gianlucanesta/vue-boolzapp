@@ -87,6 +87,12 @@
                     <div class="single-user-info-container">
                         <!-- Contact Name -->
                         <span>{{ contact.name }}</span>
+                        
+                        <span 
+                            class="single-contact-data dark-gray"
+                        >
+                            {{ contact.messages[contact.messages.length - 1].date }}
+                        </span>
 
                         <span class="single-contact-message dark-gray">
                             {{ contact.messages[contact.messages.length - 1].text }}
@@ -149,7 +155,22 @@
 
                     <!-- Message Date -->
                     <span class="message-date">{{ message.date }}</span>
-
+                    
+                    <!-- Dropdown Icon -->
+                    <i 
+                        class="fas fa-chevron-down dropdown-icon text-gray" 
+                        @click="toggleDropdown(index)"
+                    >
+                    </i>
+                    <!-- Message Dropdown Menu -->
+                    <div class="dropdown-menu bg-white">
+                        <span class="message-info">Info</span>
+                        <span 
+                            class="delete-message"
+                            @click="deleteMessage(index)"
+                        >Cancella messaggio
+                        </span>
+                    </div>
                 </div>
             </div>
 
