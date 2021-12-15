@@ -33,9 +33,9 @@
 
                 <!-- Owner Options -->
                 <div class="options">
+                    <i class="fas fa-ellipsis-v"></i>
                     <i class="fas fa-circle-notch"></i>
                     <i class="fas fa-comment-alt"></i>
-                    <i class="fas fa-ellipsis-v"></i>
                 </div>
             </div>
 
@@ -76,7 +76,6 @@
                     v-for="(contact, index) in contacts" 
                     :class="{ selected : contact === currentUser }" 
                     @click="changeContact(index)"   
-
                 >
                     <!-- Contact Image Container -->
                     <div class="avatar-image-container">
@@ -158,7 +157,7 @@
                     
                     <!-- Dropdown Icon -->
                     <i 
-                        class="fas fa-chevron-down dropdown-icon text-gray" 
+                        class="fas fa-chevron-down dropdown-icon" 
                         @click="toggleDropdown(index)"
                     >
                     </i>

@@ -97,12 +97,13 @@ const app = new Vue({
             },
         ],
 
-        messageInputBar: "",
-        searchUser: "",
+        messageInputBar: null,
+        searchUser: null,
+        activeMessage: null,
 
         currentUser: {
-            name: "",
-            avatar: "",
+            name: null,
+            avatar: null,
             visible: true,
             messages: [{}] 
         }
@@ -166,12 +167,41 @@ const app = new Vue({
                     element.visible = false;
                 }
             });
-        }
+        },
+
+        // Message dropdown menu
+        toggleDropdown(index) {
+            const dropdownElement = document.querySelectorAll(".dropdown-menu");
+            let dropdownToggle = dropdownElement[index].style;
+
+            if (dropdownToggle.display === "flex") {
+                dropdownToggle.display = "none";
+            } else {
+                dropdownToggle.display = "flex";
+            }
+        },
+
+        // Delete Message
+        deleteMessage(index) {
+            const messages = this.currentUser.messages;
+            messages.splice(index, 1);
+        },
     }, 
+
     mounted() {
         // Scelgo il primo contatto come default 
         this.currentUser = this.contacts[0];
+  
+        // Chiudo il dropdown menu quando clicko fuori da esso
+        document.addEventListener("click", function (event) {
+            const dropdownElement = document.querySelectorAll(".dropdown-menu");
+            
+            dropdownElement.forEach(function (dropdown) {
+                if (dropdown.style.display === "flex") {
+                    dropdown.style.display = "none";
+                }
+            });
+        }, true);
     }
-
 });
 
